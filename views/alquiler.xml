@@ -6,7 +6,7 @@
         <field name="view_type">form</field>
         <field name="view_mode">tree,form,calendar</field>
     </record>
-
+    
     <menuitem name="Alquiler" id="videoclub_alquiler_menu" parent="videoclub_base_menu" action="videoclub_alquiler_action"/>
 
     <record id="videoclub_alquiler_view_form" model="ir.ui.view">

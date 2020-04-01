@@ -6,7 +6,7 @@
         <field name="view_type">form</field>
         <field name="view_mode">tree,form</field>
      </record>
-
+     
     <menuitem name="Directores" id="videoclub_directores_menu" parent="videoclub_base_menu" action="videoclub_directores_action"/>
 
      <record id="videoclub_directores_view_form" model="ir.ui.view">

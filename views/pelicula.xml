@@ -7,7 +7,7 @@
         <field name="view_type">form</field>
         <field name="view_mode">tree,form,kanban</field>
     </record>
-
+    
     <menuitem name="Videoclub" id="videoclub_base_menu" />
     <menuitem name="Pelicula" id="videoclub_pelicula_menu" parent="videoclub_base_menu" action="videoclub_pelicula_action"/>
 

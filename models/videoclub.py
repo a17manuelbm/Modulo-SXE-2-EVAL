@@ -80,7 +80,6 @@ class VideoclubPelicula(models.Model):
         'State', default="disponible")
 
 
-
 class VideoclubAlquiler(models.Model):
     _name='videoclub.alquiler'
     _description='Videoclub Alquiler'
