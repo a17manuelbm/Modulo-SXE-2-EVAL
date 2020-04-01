@@ -21,7 +21,7 @@
                 <group>
                     <group>
                         <field name="titulo"/>
-                        <field name="directores" widget="many2many_tags"/>
+                        <field name="directores"/>
                     </group>
                     <group>
                         <field name="horas"/>

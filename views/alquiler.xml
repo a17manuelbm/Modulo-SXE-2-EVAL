@@ -16,7 +16,7 @@
         <form>
             <group>
                 <group>
-                    <field name="nombre_peliculas" form_view_id="videoclub_pelicula_view_form"/>
+                    <field name="nombre_peliculas"/>
                     <field name="fecha_alquiler"/>
                     <field name="fecha_devolucion"/>
                 </group>

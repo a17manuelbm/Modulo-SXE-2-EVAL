@@ -6,21 +6,6 @@ from odoo import models, fields, api
 from odoo.exceptions import UserError
 from odoo.tools.translate import _
 
-
-class VideoclubPelicula(models.Model):
-    _name = 'videoclub.pelicula'
-    _description = 'Peliculas'
-
-    titulo= fields.Char('Titulo', required=True)
-    genero = fields.Char('Generos')
-    horas = fields.Integer('Duracion')
-    directores=fields.Many2many('res.partner','Directores')
-
-    state = fields.Selection([
-        ('disponible', 'Disponible'),
-        ('nodisponible', 'Sin Stock')],
-        'State', default="disponible")
-
 class VideclubDirectores(models.Model):
     _name='videoclub.directores'
     _description='Videoclub Directores'
@@ -40,14 +25,19 @@ class VideclubDirectores(models.Model):
 
     @api.multi
     def calcular_edad(self):
-        nac = self.fecha_nacimiento
-        hoy = date.today()
-        cumple = self.fecha_nacimiento.replace(year=hoy.year)
-        if cumple > hoy:
-            self.edad = hoy.year - nac.year - 1
+        fecha_nac = self.fecha_nacimiento
+        fecha_actual = date.today()
+        fecha_cunple = self.fecha_nacimiento.replace(year=fecha_actual.year)
+        if fecha_cunple > fecha_actual:
+            self.edad = fecha_actual.year - fecha_nac.year - 1
         else:
-            self.edad = hoy.year - nac.year
+            self.edad = fecha_actual.year - fecha_nac.year
         return
+    @api.constrains('fecha_nacimiento')
+    def _comprobar_fecha_nacimiento(self):
+        for r in self:
+            if r.fecha_nacimiento >= fields.Date.today():
+                raise models.ValidationError('Fecha de nacimiento erronea')
 
     @api.model
     def is_allowed_transition(self, old_state, new_state):
@@ -75,6 +65,22 @@ class VideclubDirectores(models.Model):
     def volver(self):
         self.change_state('activo')
 
+class VideoclubPelicula(models.Model):
+    _name = 'videoclub.pelicula'
+    _description = 'Peliculas'
+
+    titulo= fields.Char('Titulo', required=True)
+    genero = fields.Char('Generos')
+    horas = fields.Integer('Duracion')
+    directores=fields.Many2one('res.partner','Directores')
+
+    state = fields.Selection([
+        ('disponible', 'Disponible'),
+        ('nodisponible', 'Sin Stock')],
+        'State', default="disponible")
+
+
+
 class VideoclubAlquiler(models.Model):
     _name='videoclub.alquiler'
     _description='Videoclub Alquiler'
@@ -83,8 +89,8 @@ class VideoclubAlquiler(models.Model):
     fecha_alquiler=fields.Date('Fecha de alquiler',default=lambda*a:datetime.now().strftime('%Y-%m-%d'))
     fecha_devolucion=fields.Date('Fecha devolucion',required=True)
 
-    @api.constrains(fecha_alquiler,fecha_devolucion)
-    def comprobar_fechas_alquiler(self):
+    @api.constrains('fecha_alquiler','fecha_devolucion')
+    def _comprobar_fechas_alquiler(self):
         for record in self:
             if record.fecha_alquiler > record.fecha_devolucion:
                 raise models.ValidationError('Fecha devolucion no puede ser anterior a la de alquiler')
