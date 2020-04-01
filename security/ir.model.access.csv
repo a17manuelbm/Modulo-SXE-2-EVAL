@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+
+videoclub,videoclub_default,model_videoclub_pelicula,,1,1,1,1
+videoclubdirectores,videoclub_default,model_videoclub_directores,,1,1,1,1
+videoclubalquiler,videoclub_default,model_videoclub_alquiler,,1,1,1,1

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+     <record id='videoclub_directores_action' model='ir.actions.act_window'>
+        <field name="name">Directores</field>
+        <field name="res_model">videoclub.directores</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+     </record>
+
+    <menuitem name="Directores" id="videoclub_directores_menu" parent="videoclub_base_menu" action="videoclub_directores_action"/>
+
+     <record id="videoclub_directores_view_form" model="ir.ui.view">
+        <field name="name">Videclub Directores Form</field>
+        <field name="model">videoclub.directores</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="retirarse" string="Retirarse" type="object"/>
+                    <button name="fallecer"  string="Fallecer" type="object"/>
+                    <button name="volver"  string="Volver" type="object"/>
+                </header>
+                <group>
+                    <group>
+                        <field name="partner_id"/>
+                        <field name="nombre"/>
+                        <field name="foto" widget="image" class="oe_avatar"/>
+                    </group>
+                    <group>
+                        <field name="fecha_nacimiento"/>
+                        <field name="edad"/>
+                        <field name="retirado"/>
+                    </group>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <record id="videoclub_directores_view_tree" model="ir.ui.view">
+        <field name="name">Videoclub Directores List</field>
+        <field name="model">videoclub.directores</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="nombre"/>
+                <field name="partner_id"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+</odoo>

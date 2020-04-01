@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id='videoclub_alquiler_action' model='ir.actions.act_window'>
+        <field name="name">Videoclub ALquiler</field>
+        <field name="res_model">videoclub.alquiler</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form,calendar</field>
+    </record>
+
+    <menuitem name="Alquiler" id="videoclub_alquiler_menu" parent="videoclub_base_menu" action="videoclub_alquiler_action"/>
+
+    <record id="videoclub_alquiler_view_form" model="ir.ui.view">
+        <field name="name">Videoclub Alquiler Form</field>
+        <field name="model">videoclub.alquiler</field>
+        <field name="arch" type="xml">
+        <form>
+            <group>
+                <group>
+                    <field name="nombre_peliculas" form_view_id="videoclub_pelicula_view_form"/>
+                    <field name="fecha_alquiler"/>
+                    <field name="fecha_devolucion"/>
+                </group>
+                </group>
+        </form>
+        </field>
+    </record>
+
+    <record id="videoclub_alquiler_view_tree" model="ir.ui.view">
+        <field name="name">Videoclu Alquiler List</field>
+        <field name="model">videoclub.alquiler</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="nombre_peliculas"/>
+                <field name="fecha_alquiler"/>
+                <field name="fecha_devolucion"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="videoclub_alquiler_view_calendar" model="ir.ui.view">
+        <field name="name">Videoclub Alquiler Calendar</field>
+        <field name="model">videoclub.alquiler</field>
+        <field name="arch" type="xml">
+            <calendar string="Alquileres" date_start="fecha_alquiler" date_stop="fecha_devolucion" mode="month" form_view_id="videoclub_alquiler_view_form">
+                <field name="nombre_peliculas"/>
+            </calendar>
+        </field>
+    </record>
+
+</odoo>

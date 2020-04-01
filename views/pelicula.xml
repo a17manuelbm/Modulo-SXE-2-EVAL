@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id='videoclub_pelicula_action' model='ir.actions.act_window'>
+        <field name="name">Pelicula</field>
+        <field name="res_model">videoclub.pelicula</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form,kanban</field>
+    </record>
+
+    <menuitem name="Videoclub" id="videoclub_base_menu" />
+    <menuitem name="Pelicula" id="videoclub_pelicula_menu" parent="videoclub_base_menu" action="videoclub_pelicula_action"/>
+
+
+    <!-- Form View -->
+    <record id="videoclub_pelicula_view_form" model="ir.ui.view">
+        <field name="name">Videoclub Pelicula Form</field>
+        <field name="model">videoclub.pelicula</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <group>
+                        <field name="titulo"/>
+                        <field name="directores" widget="many2many_tags"/>
+                    </group>
+                    <group>
+                        <field name="horas"/>
+                        <field name="genero"/>
+                    </group>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <!-- Kanban View -->
+    <record id="videoclub_pelicula_view_kanban" model="ir.ui.view">
+        <field name="name">Videoclub Pelicula Kanban</field>
+        <field name="model">videoclub.pelicula</field>
+        <field name="arch" type="xml">
+            <kanban default_group_bt="level">
+                <field name="titulo"/>
+                <field name="genero"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_card oe_kanban_global_click">
+                            <field name="titulo"/>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+
+
+    <!-- Tree(list) View -->
+    <record id="videoclub_pelicula_view_tree" model="ir.ui.view">
+        <field name="name">Videoclub Pelicula List</field>
+        <field name="model">videoclub.pelicula</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="titulo"/>
+                <field name="genero"/>
+            </tree>
+        </field>
+    </record>
+
+</odoo>
